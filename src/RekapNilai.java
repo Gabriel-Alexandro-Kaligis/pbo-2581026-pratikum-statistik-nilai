@@ -1,4 +1,3 @@
-```java
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -56,6 +55,48 @@ public class RekapNilai {
 
         int jumlah = daftar.size();
         System.out.println("Jumlah          : " + jumlah);
+
+        double total =0;
+
+        for (int nilai : daftar){
+            total += nilai;
+        }
+
+        double rataRata= total / jumlah;
+
+        System.out.printf(
+                Locale.forLanguageTag("id-ID"),
+                "Rata-rata        : %2f%n",
+                rataRata
+        );
+
+        int tertinggi = daftar.get(0);
+        int terendah = daftar.get(0);
+
+        for (int i = 0 ; i < daftar.size(); i++){
+            int nilai = daftar.get(i);
+
+            if (nilai > tertinggi){
+                tertinggi = nilai;
+            }
+            if (nilai < terendah){
+                terendah = nilai;
+            }
+        }
+
+        System.out.println("Tertinggi       : " + tertinggi);
+        System.out.println("Terendah        : " + terendah);
+
+        int diAtasRataRata = 0;
+
+        for (int nilai : daftar) {
+            if (nilai > rataRata){
+                diAtasRataRata++;
+
+            }
+        }
+
+        System.out.println("Di atas rata2 : " + diAtasRataRata + " orang");
 
         in.close();
     }

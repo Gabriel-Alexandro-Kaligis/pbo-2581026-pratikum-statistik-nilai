@@ -69,7 +69,10 @@ public class RekapNilai {
                 "Rata-rata        : %2f%n",
                 rataRata
         );
-
+        // Mencari nilai tertinggi dan terendah menggunakan loop sendiri
+        // Keduanya dimulai dari nilai pertama dalam daftar, bukan dari 0 atau 100,
+        // karena nilai awal buatan bisa salah (misal semua nilai 80, tertinggi
+        // tetap 100 kalau dimulai dari 100). Nilai pertama pasti ada di data.
         int tertinggi = daftar.get(0);
         int terendah = daftar.get(0);
 
@@ -87,6 +90,9 @@ public class RekapNilai {
         System.out.println("Tertinggi       : " + tertinggi);
         System.out.println("Terendah        : " + terendah);
 
+        // Tidak bisa dihitung di putaran pertama, karena saat suatu nilai dibaca
+        // rata-ratanya belum diketahui (total belum lengkap). Maka butuh putaran
+        // kedua setelah rata-rata final.
         int diAtasRataRata = 0;
 
         for (int nilai : daftar) {
@@ -97,6 +103,43 @@ public class RekapNilai {
         }
 
         System.out.println("Di atas rata2 : " + diAtasRataRata + " orang");
+
+        int[] jumlahGrade = new int[5];
+
+
+        for (int nilai : daftar) {
+
+            if (nilai >= 90) {
+                jumlahGrade[0]++;
+            } else if (nilai >= 80) {
+                jumlahGrade[1]++;
+            } else if (nilai >= 70) {
+                jumlahGrade[2]++;
+            } else if (nilai >= 60) {
+                jumlahGrade[3]++;
+            } else {
+                jumlahGrade[4]++;
+            }
+        }
+
+        char[] grade = {'A', 'B', 'C', 'D', 'E'};
+
+        System.out.print("Distribusi      : ");
+
+        for (int i = 0; i < jumlahGrade.length; i++) {
+            System.out.print(grade[i] + "=" + jumlahGrade[i]);
+
+            if (i < jumlahGrade.length - 1) {
+                System.out.print(" ");
+            }
+        }
+
+        System.out.println();
+
+        ArrayList<Integer> terurut = new ArrayList<>(daftar);
+        Collections.sort(terurut);
+        System.out.println("Terurut         : " + terurut);
+        System.out.println("Urutan asli     : " + daftar);
 
         in.close();
     }
